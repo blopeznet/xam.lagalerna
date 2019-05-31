@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Xam.LaGalerna"
+             x:Class="Xam.LaGalerna.Views.Templates.RelatedContentTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RelatedContentTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkGray" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize12}" />
+                <Setter Property="Margin" Value="0, 6, 0, 0" />
+            </Style>
+
+            <Style x:Key="RelatedContentSubtitleStyle" TargetType="Label">
+                <Setter Property="MaxLines" Value="1" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize12}" />
+                <Setter Property="Margin" Value="0, 0, 0, 6" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            RowSpacing="0"
+            HeightRequest="150"
+            BackgroundColor="{StaticResource BackGrayColor}"
+            Padding="0, 0, 6, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image x:Name="BackImage" 
+                                                           Grid.Row="0"
+                                                           Grid.RowSpan="3"
+                                                           Aspect="AspectFill" 
+                                                           IsEnabled="True"  
+                                                           Source="{local:ImageResource Xam.LaGalerna.Assets.logo_small.png}" 
+                                                           HeightRequest="100"
+                                                           WidthRequest="100"
+                                                           HorizontalOptions="Center" 
+                                                           VerticalOptions="Center">
+            </Image>
+            <ffimageloading:CachedImage
+                Grid.Row="0"
+                Aspect="AspectFill"
+                Source="{Binding UrlImg}"/>
+            <Label
+                Grid.Row="2"
+                Text="{Binding Title}"
+                Style="{StaticResource RelatedContentSubtitleStyle}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
