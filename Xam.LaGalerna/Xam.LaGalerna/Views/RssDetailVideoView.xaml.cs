@@ -32,14 +32,16 @@ namespace Xam.LaGalerna.Views
             html.Html = model.ArtItem.Content;
             this.webViewVideo.Source = html;
         }
+   
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Related_SelectionChanged(object sender, System.EventArgs e)
         {
             MainViewModel.Instance.IsBusy = true;
             await Navigation.PopAsync();
-            SharedTransitionNavigationPage.SetSelectedTagGroup(this, ((int)((Rss.FeedItem)e.CurrentSelection[0]).Number) + 1);
+            Rss.FeedItem context = (Rss.FeedItem)(sender as View).BindingContext;
+            SharedTransitionNavigationPage.SetSelectedTagGroup(this, (context.Number) + 1);
             MainViewModel.Instance.IsBusy = false;
-            await Navigation.PushAsync(new RssDetailVideoView(e.CurrentSelection[0]));
+            await Navigation.PushAsync(new RssDetailView(context));
         }
     }
 }

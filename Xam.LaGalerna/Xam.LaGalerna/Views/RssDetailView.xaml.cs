@@ -13,7 +13,16 @@ namespace Xam.LaGalerna.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RssDetailView : ContentPage
 	{
-		public RssDetailView (object parameter)
+
+        #region private vars
+
+        private const int ParallaxSpeed = 5;
+
+        private double _lastScroll;
+
+        #endregion
+
+        public RssDetailView (object parameter)
 		{
 			InitializeComponent ();
 
@@ -25,14 +34,54 @@ namespace Xam.LaGalerna.Views
             SharedTransitionNavigationPage.SetSharedTransitionDuration(this, 500);
         }
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Related_SelectionChanged(object sender, System.EventArgs e)
         {
             MainViewModel.Instance.IsBusy = true;
             await Navigation.PopAsync();
-            SharedTransitionNavigationPage.SetSelectedTagGroup(this, ((int)((Rss.FeedItem)e.CurrentSelection[0]).Number) + 1);
+            Rss.FeedItem context = (Rss.FeedItem)(sender as View).BindingContext;
+            SharedTransitionNavigationPage.SetSelectedTagGroup(this, (context.Number) + 1);
             MainViewModel.Instance.IsBusy = false;
-            await Navigation.PushAsync(new RssDetailView(e.CurrentSelection[0]));             
+            await Navigation.PushAsync(new RssDetailView(context));             
         }
-        
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ParallaxScroll.Scrolled += OnParallaxScrollScrolled;
+        }
+
+        /// <summary>
+        /// Event appear to unsuscribe scroll event
+        /// </summary>
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ParallaxScroll.Scrolled -= OnParallaxScrollScrolled;
+        }
+
+        /// <summary>
+        /// Effect parallax when scroll
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnParallaxScrollScrolled(object sender, ScrolledEventArgs e)
+        {
+            double translation = 0;
+
+            if (_lastScroll < e.ScrollY)
+            {
+                translation = 0 - ((e.ScrollY / 2));
+                if (translation > 0) translation = 0;
+            }
+            else
+            {
+                translation = 0 + ((e.ScrollY / 2));
+                if (translation > 0) translation = 0;
+            }
+
+            HeaderPanel.TranslateTo(HeaderPanel.TranslationX, translation);
+            _lastScroll = e.ScrollY;
+        }
+
     }
 }

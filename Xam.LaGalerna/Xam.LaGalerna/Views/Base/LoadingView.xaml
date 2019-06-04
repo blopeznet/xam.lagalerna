@@ -4,9 +4,10 @@
              xmlns:local="clr-namespace:Xam.LaGalerna"
              xmlns:vm="clr-namespace:Xam.LaGalerna.ViewModels"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="{StaticResource BackGrayColor}"
              x:Class="Xam.LaGalerna.Views.LoadingView">
   <ContentView.Content>
-        <Grid x:Name="GridLoad" BackgroundColor="{StaticResource BackGrayColor}">
+        <Grid x:Name="GridLoad">
             <ffimageloading:CachedImage Opacity="80" HeightRequest="80" WidthRequest="80" 
                    Source="{local:ImageResource Xam.LaGalerna.Assets.load.gif}" 
                    IsVisible="{Binding Source={x:Static vm:MainViewModel.Instance},Path=IsBusy}"

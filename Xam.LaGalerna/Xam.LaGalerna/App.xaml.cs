@@ -27,8 +27,7 @@ namespace Xam.LaGalerna
         async Task<bool> InitNavigation()
         {
             MainView page = new MainView();
-            var viewModel = Locator.Instance.Resolve(typeof(MainViewModel)) as ViewModelBase;
-            page.BindingContext = viewModel;
+            page.BindingContext = MainViewModel.Instance;
             MainPage = new CustomNavigationPage(page);
             return true;
         }

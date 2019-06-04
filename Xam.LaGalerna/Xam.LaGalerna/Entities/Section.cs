@@ -42,6 +42,23 @@ namespace Xam.LaGalerna.Entities
             }
         }
 
+        bool _LoadOnInit;
+        /// <summary>
+        /// Load on init
+        /// </summary>
+        public bool LoadOnInit
+        {
+            get
+            {
+                return _LoadOnInit;
+            }
+            set
+            {
+                _LoadOnInit = value;
+                OnPropertyChanged("LoadOnInit");
+            }
+        }
+
         String _SourceUrl;
         /// <summary>
         /// Source Url

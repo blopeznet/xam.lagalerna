@@ -5,6 +5,7 @@
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:templates="clr-namespace:Xam.LaGalerna.Views.Templates"
+             xmlns:local="clr-namespace:Xam.LaGalerna"
              BackgroundColor="{StaticResource WhiteColor}"
              x:Class="Xam.LaGalerna.Views.RssDetailVideoView">
     <ContentPage.Resources>
@@ -47,6 +48,19 @@
                 <Setter Property="FontSize" Value="{StaticResource FontSize16}" />
             </Style>
 
+
+            <Style x:Key="RelatedContentTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkGray" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize12}" />
+                <Setter Property="Margin" Value="0, 6, 0, 0" />
+            </Style>
+
+            <Style x:Key="RelatedContentSubtitleStyle" TargetType="Label">
+                <Setter Property="MaxLines" Value="1" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize12}" />
+                <Setter Property="Margin" Value="0, 0, 0, 6" />
+            </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Triggers>
@@ -116,8 +130,6 @@
                         <CollectionView
                             Grid.Row="1"
                             ItemsSource="{Binding ArtItem.Related}"
-                            SelectionMode="Single"
-                            SelectionChanged="CollectionView_SelectionChanged"
                             InputTransparent="True">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout 
@@ -126,8 +138,43 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <templates:RelatedContentTemplate />
+                                    <Grid
+            RowSpacing="0"
+            HeightRequest="150"
+            BackgroundColor="{StaticResource BackGrayColor}"
+            Padding="0, 0, 6, 0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer                                                            
+                                        Tapped="Related_SelectionChanged"/>
+                                        </Grid.GestureRecognizers>
+                                        <Image x:Name="BackImage" 
+                                                           Grid.Row="0"
+                                                           Grid.RowSpan="3"
+                                                           Aspect="AspectFill" 
+                                                           IsEnabled="True"  
+                                                           Source="{local:ImageResource Xam.LaGalerna.Assets.logo_small.png}" 
+                                                           HeightRequest="100"
+                                                           WidthRequest="100"
+                                                           HorizontalOptions="Center" 
+                                                           VerticalOptions="Center">
+                                        </Image>
+                                        <ffimageloading:CachedImage
+                Grid.Row="0"
+                Aspect="AspectFill"
+                Source="{Binding UrlImg}"/>
+                                        <Label
+                Grid.Row="2"
+                Text="{Binding Title}"
+                Style="{StaticResource RelatedContentSubtitleStyle}"/>
+                                    </Grid>
+
                                 </DataTemplate>
+
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Grid>

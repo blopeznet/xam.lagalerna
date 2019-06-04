@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xam.LaGalerna.Entities;
+using Xam.LaGalerna.ViewModels;
 using Xam.LaGalerna.Views;
 using Xamarin.Forms;
 
@@ -38,6 +40,34 @@ namespace Xam.LaGalerna
                 default:
                     break;
             }
+        }
+
+        private void StackLayout_ChildAdded(object sender, ElementEventArgs e)
+        {
+            base.OnChildAdded(e.Element);            
+
+            uint duration = 750;
+
+            // We are going to create a simple but nice animation. 
+            // We will fade in at the same time we translade the cell view from the bottom to the top.
+            var animation = new Animation();
+
+            animation.WithConcurrent((f) => ((Grid)e.Element).Opacity = f, 0, 1, Easing.CubicOut);
+
+            animation.WithConcurrent(
+              (f) => ((Grid)e.Element).TranslationY = f,
+              ((Grid)e.Element).TranslationY + 50, 0,
+              Easing.CubicOut, 0, 1);
+
+            ((Grid)e.Element).Animate("FadeIn", animation, 16, Convert.ToUInt32(duration));
+        }
+
+        private async void Menu_SelectionChanged(object sender, System.EventArgs e)
+        {
+            MainViewModel.Instance.IsBusy = true;
+            Section context = (Section)(sender as View).BindingContext;
+            await MainViewModel.Instance.UpdateSectionsShow(context);
+            MainViewModel.Instance.IsBusy = false;
         }
     }
 }
