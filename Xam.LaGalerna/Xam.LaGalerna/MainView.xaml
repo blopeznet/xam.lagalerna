@@ -75,7 +75,10 @@
                                     <TapGestureRecognizer                                                            
                                         Tapped="Menu_SelectionChanged"/>
                                 </Grid.GestureRecognizers>
+                                <Grid HeightRequest="0.5" IsVisible="{Binding IsSelected}" BackgroundColor="{StaticResource WhiteColor}" VerticalOptions="Start" HorizontalOptions="Fill" Margin="4,4,4,4"></Grid>
+                                <Grid HeightRequest="0.5" IsVisible="{Binding IsSelected}" BackgroundColor="{StaticResource WhiteColor}" VerticalOptions="End" HorizontalOptions="Fill" Margin="4,4,4,4"></Grid>
                                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Title}" Style="{StaticResource HighlightPaintinStyle}" TextColor="{StaticResource WhiteColor}" ></Label>
+                                
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

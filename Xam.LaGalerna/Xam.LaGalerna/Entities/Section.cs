@@ -59,6 +59,23 @@ namespace Xam.LaGalerna.Entities
             }
         }
 
+        bool _IsSelected;
+        /// <summary>
+        /// Load on init
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return _IsSelected;
+            }
+            set
+            {
+                _IsSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
         String _SourceUrl;
         /// <summary>
         /// Source Url
