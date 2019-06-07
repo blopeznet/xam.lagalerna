@@ -13,6 +13,8 @@
     <None Remove="Assets\logo.png" />
     <None Remove="Assets\logo_big.png" />
     <None Remove="Assets\logo_small.png" />
+    <None Remove="Assets\Spotify_logo.png" />
+    <None Remove="Assets\Youtube_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,12 +28,15 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\logo.png" />
+    <EmbeddedResource Include="Assets\Spotify_logo.png" />
+    <EmbeddedResource Include="Assets\Youtube_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.4" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+    <PackageReference Include="Xam.Forms.VideoPlayer" Version="1.0.2" />
     <PackageReference Include="Xamanimation" Version="1.2.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -59,6 +64,9 @@
     <EmbeddedResource Update="Views\RssDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\SpotifyPlayListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +82,9 @@
     </Compile>
     <Compile Update="Views\RssDetailView.xaml.cs">
       <DependentUpon>RssDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SpotifyPlayListView.xaml.cs">
+      <DependentUpon>SpotifyPlayListView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

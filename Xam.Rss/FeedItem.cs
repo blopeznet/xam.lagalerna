@@ -24,6 +24,11 @@
         public string UrlImg { get; set; }
 
         /// <summary>
+        /// The url of video
+        /// </summary>
+        public string UrlVideo { get; set; }
+
+        /// <summary>
         /// The title of the feed item
         /// </summary>
         public string Title { get; set; }

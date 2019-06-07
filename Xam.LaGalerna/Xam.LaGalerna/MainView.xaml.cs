@@ -24,6 +24,13 @@ namespace Xam.LaGalerna
             SharedTransitionNavigationPage.SetSharedTransitionDuration(this, 500);
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (Device.RuntimePlatform == Device.Android)
+                DependencyService.Get<Forms.VideoPlayer.IStatusBar>().HideStatusBar();
+        }
+
         private async void OnHighlightTapped(object sender, System.EventArgs e)
         {
             Xam.Rss.FeedItem context = (Xam.Rss.FeedItem)(sender as View).BindingContext;
@@ -36,6 +43,9 @@ namespace Xam.LaGalerna
                     break;
                 case Entities.SectionType.Youtube:
                     await Navigation.PushAsync(new RssDetailVideoView(context));
+                    break;
+                case Entities.SectionType.Spotify:
+                    await Navigation.PushAsync(new SpotifyPlayListView(context));
                     break;
                 default:
                     break;

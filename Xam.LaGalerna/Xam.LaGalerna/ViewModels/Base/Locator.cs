@@ -26,6 +26,9 @@ namespace Xam.LaGalerna.ViewModels.Base
 
         public void Register<T>() where T : class => _containerBuilder.RegisterType<T>();
 
-        public void Build() => _container = _containerBuilder.Build();
+        public void Build() {
+
+            _container = _containerBuilder.Build();
+        }
     }
 }

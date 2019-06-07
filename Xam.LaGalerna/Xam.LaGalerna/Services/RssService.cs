@@ -59,6 +59,53 @@ namespace Xam.LaGalerna.Services
             return items;
         }
 
+        /// <summary>
+        /// Local spotify playlist
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Xam.Rss.FeedItem>> GetSpotifyArticles()
+        {
+            List<Xam.Rss.FeedItem> items = new List<FeedItem>();
+
+            Xam.Rss.FeedItem i = new FeedItem();
+            i.Title = "Camino del Bernabéu ";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/5atmXQ3TIrVWBJLRl1RSyz";
+            i.Number = 2;            
+            items.Add(i);
+
+            i = new FeedItem();
+            i.Title = "El madrid siempre vuelve";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4bR7VWFWYijLYFFSbR1WHx";
+            i.Number = 2;            
+            items.Add(i);
+
+            i = new FeedItem();
+            i.Title = "Gramola portanalista";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/6be8PI9vWH9OX5BM7SyIVt";
+            i.Number = 2;
+            items.Add(i);
+
+            i = new FeedItem();
+            i.Title = "Himnos oficiosos del Real Madrid";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4Bqd0NoHPcGxtoFOHrUTBg";
+            i.Number = 2;            
+            items.Add(i);
+
+            i = new FeedItem();
+            i.Title = "Perpetuum Real Madrid";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/7L7T1BD5SLNUoOnmsnxAjY";
+            i.Number = 2;
+            items.Add(i);
+
+            i = new FeedItem();            
+            i.Title = "Los años de la Quinta";
+            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4T7ImtDYmnbdVzG5P4Y0vj";
+            i.Number = 2;            
+            items.Add(i);
+
+            return items;
+        }
+
 
         private String ConvertUrlToText(String url)
         {

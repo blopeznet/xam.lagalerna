@@ -3,6 +3,7 @@
         public enum SectionType
         {
             Articles,
-            Youtube
+            Youtube,
+            Spotify
         }    
 }

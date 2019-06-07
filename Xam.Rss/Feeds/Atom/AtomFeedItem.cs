@@ -17,6 +17,11 @@
         public string UrlImg { get; set; }
 
         /// <summary>
+        /// The url of Video
+        /// </summary>
+        public string UrlVideo { get; set; }
+
+        /// <summary>
         /// The description of the feed item
         /// </summary>
         public string Description { get; set; }
@@ -141,6 +146,7 @@
                 PublishingDateString = this.PublishedDateString,
                 Title = this.Title,
                 UrlImg = this.UrlImg,
+                UrlVideo = this.UrlVideo
             };
 
             if (String.IsNullOrEmpty(this.Description))
@@ -157,9 +163,12 @@
                 this.Description = subitem.GetValue("media:description");
                 this.Title = subitem.GetValue("media:title");
                 this.UrlImg = subitem.GetElement("media:thumbnail").GetAttributeValue("url");
+                this.UrlVideo = "https://www.youtube.com/watch?v={i}";                
                 String videoId = this.Id.Split(':').LastOrDefault();
-                this.Content = "<html><body style=\"background-color:#000000\"><div style=\"text -align:center\"><iframe style=\"background-color:#000000\" class=\"youtube -player\" type =\"text /html\" width =\"{w}\"  height =\"{h}\" src =\"http://www.youtube.com/embed/{i}\" frameborder =\"0\" ></div></body></html>";
-                this.Content = this.Content.Replace("{i}", videoId); 
+                //this.Content = "<html><body style=\"background-color:#000000\"><div style=\"text -align:center\"><iframe style=\"background-color:#000000\" class=\"youtube -player\" type =\"text /html\" width =\"{w}\"  height =\"{h}\" src =\"http://www.youtube.com/embed/{i}\" frameborder =\"0\" ></div></body></html>";
+                this.Content = "<iframe style=\"background-color:#000000\" width =\"{w}\"  height =\"{h}\" src =\"http://www.youtube.com/embed/{i}\" allowfullscreen frameborder =\"0\" >";
+                this.Content = this.Content.Replace("{i}", videoId);
+                this.UrlVideo = this.UrlVideo.Replace("{i}", videoId);
             }
         }
     }

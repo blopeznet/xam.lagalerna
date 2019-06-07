@@ -71,107 +71,194 @@
         </EventTrigger>
     </ContentPage.Triggers>
     <ContentPage.Content>
-        <ScrollView 
+            <ScrollView 
             x:Name="ParallaxScroll" 
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical">
-            <Grid
+                <Grid
                 RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="320" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <!-- HEADER -->
-                <Grid x:Name="HeaderPanel"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="320" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <!-- HEADER -->
+                    <Grid x:Name="HeaderPanel"
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand" 
                     Grid.Row="0">
-                    <Image x:Name="LogoImage"                                                            
+                        <Image x:Name="LogoImage"                                                            
                    Aspect="AspectFill"
                    IsEnabled="True"                    
                    Source="{local:ImageResource Xam.LaGalerna.Assets.logo_big.png}" 
                    />
-                    <ffimageloading:CachedImage
+                        <ffimageloading:CachedImage
                         Aspect="AspectFill"
                         Source="{Binding ArtItem.UrlImg}"
                         sharedTransitions:Transition.Tag="{Binding ArtItem.Number}" />
-                </Grid>
-                <!-- CONTENT -->
-                <StackLayout
+                    </Grid>
+                    <!-- CONTENT -->
+                    <StackLayout
                     x:Name="ArtItemContent"
                     Grid.Row="1"
                     Opacity="0"
                     TranslationY="300">
-                    <!-- MAIN INFO -->
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto " />
+                        <!-- MAIN INFO -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto "/>
                         </Grid.RowDefinitions>
-                        <Label 
+                            <Label 
                             Grid.Row="0"
                             Text="{Binding ArtItem.Title}"
                             Style="{StaticResource ArtItemTitleStyle}"/>
-                        <Label
+                            <Label
                             Grid.Row="1"
                             Text="{Binding ArtItem.Author}"
                             Style="{StaticResource ArtItemSubtitleStyle}"/>
-                        <Label 
+                            <Label 
                             Grid.Row="2"
                             Text="{Binding ArtItem.PublishingDateString}"
                             Style="{StaticResource ArtItemSubtitleStyle}"/>
-                    </Grid>
-                    <!-- SEPARATOR -->
-                    <Grid 
+                        </Grid>
+                        <!-- SEPARATOR -->
+                        <Grid 
                         BackgroundColor="{StaticResource GrayColor}"
                         HeightRequest="1"
                         Margin="12, 6"/>
-                    <!-- BRIEF INTRODUCCTION -->
-                    <StackLayout
+                        <!-- BRIEF INTRODUCCTION -->
+                        <StackLayout
                         Padding="20">
-                        <Label
+                            <Label
                             Text="{Binding ArtItem.Description}"
                             Style="{StaticResource BriefIntroducctionTextStyle}"/>
-                    </StackLayout>
-                    <!-- RELATED CONTENT -->
-                    <Grid
+                            
+                            <!--ACTION BUTTONS-->
+                            <Grid HeightRequest="70" BackgroundColor="Black">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="16"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="1"
+                            Text="Compartir"
+                                VerticalOptions="Start"
+                                Margin="0,-4,0,0"
+                                HorizontalOptions="Center"                                
+                                FontSize="{StaticResource FontSize12}"
+                                FontFamily="{StaticResource UbuntuLight}"
+                                TextColor="{StaticResource WhiteColor}"
+                            />
+                            <ImageButton Source="share_icon.png"
+                                         x:Name="ImageButtonShare"   
+                                         WidthRequest="50"
+                                         HeightRequest="50"
+                                         Margin="0,12,0,0"
+            BackgroundColor="Transparent"            
+            Grid.Column="0"
+            FlexLayout.AlignSelf="Center"
+            FlexLayout.Grow="1"
+            Clicked="ImageButtonShare_Clicked"
+            Aspect="AspectFit">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                            <Label Grid.Row="1"
+                            Text="Web"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Center"
+                                Margin="0,-4,0,0"
+                                Grid.Column="1"
+                                FontSize="{StaticResource FontSize12}"
+                                FontFamily="{StaticResource UbuntuLight}"
+                                TextColor="{StaticResource WhiteColor}"
+                            />
+                            <ImageButton Source="web_icon.png"
+                                         x:Name="ImageButtonWeb"
+                                         WidthRequest="50"
+                                         HeightRequest="50"
+                                         Margin="0,12,0,0"                                         
+            BackgroundColor="Transparent"            
+            Grid.Column="1"
+            FlexLayout.AlignSelf="Center"
+            FlexLayout.Grow="1"
+            Clicked="ImageButtonWeb_Clicked"
+            Aspect="AspectFit">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                        </Grid>
+                        </StackLayout>
+                        <!-- RELATED CONTENT -->
+                        <Grid
                         Padding="20">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="300" />
-                        </Grid.RowDefinitions>
-                        <Label
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="300" />
+                            </Grid.RowDefinitions>
+                            <Label
                             Grid.Row="0"
-                            Text="Related Content"
+                            Text="Relacionadas"
                             Style="{StaticResource BriefIntroducctionStyle}"/>
-                        <CollectionView
+                            <CollectionView
                             Grid.Row="1"                            
                             ItemsSource="{Binding ArtItem.Related}"                           
                             InputTransparent="True">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout                                     
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout                                     
                                     Orientation="Vertical" 
                                     Span="2"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid
             RowSpacing="0"
             HeightRequest="150"
             BackgroundColor="{StaticResource BackGrayColor}"
             Padding="0, 0, 6, 0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer                                                            
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer                                                            
                                         Tapped="Related_SelectionChanged"/>
-                                        </Grid.GestureRecognizers>
-                                        <Image x:Name="BackImage" 
+                                            </Grid.GestureRecognizers>
+                                            <Image x:Name="BackImage" 
                                                            Grid.Row="0"
                                                            Grid.RowSpan="3"
                                                            Aspect="AspectFill" 
@@ -181,24 +268,23 @@
                                                            WidthRequest="100"
                                                            HorizontalOptions="Center" 
                                                            VerticalOptions="Center">
-                                        </Image>
-                                        <ffimageloading:CachedImage
+                                            </Image>
+                                            <ffimageloading:CachedImage
                 Grid.Row="0"
                 Aspect="AspectFill"
                 Source="{Binding UrlImg}"/>
-                                        <Label
+                                            <Label
                 Grid.Row="2"
                 Text="{Binding Title}"
                 Style="{StaticResource RelatedContentSubtitleStyle}"/>
-                                    </Grid>
+                                        </Grid>
 
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Grid>
-                </StackLayout>
-            </Grid>
-        </ScrollView>
-
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
     </ContentPage.Content>
 </ContentPage>

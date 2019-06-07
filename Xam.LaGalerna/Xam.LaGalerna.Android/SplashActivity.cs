@@ -20,7 +20,13 @@ namespace Xam.LaGalerna.Droid
             //Thread.Sleep(2000);
             StartActivity(intent);
             Finish();
-        }     
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            Xam.Forms.VideoPlayer.Android.VideoPicker.OnActivityResult(requestCode, resultCode, data);
+        }
     }
 }
 

@@ -25,8 +25,9 @@ namespace Xam.LaGalerna
         }
 
         async Task<bool> InitNavigation()
-        {
+        { 
             MainView page = new MainView();
+            //SpotifyPlayListView page = new SpotifyPlayListView(null);
             page.BindingContext = MainViewModel.Instance;
             MainPage = new CustomNavigationPage(page);
             return true;

@@ -16,11 +16,14 @@ namespace Xam.LaGalerna.Droid
 
             base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.SetFlags(new[] { "CollectionView_Experimental" });
+            Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App());               
             Window.SetStatusBarColor(Android.Graphics.Color.Rgb(239, 238, 237)); //status bar            
         }
+
+     
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

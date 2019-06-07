@@ -22,6 +22,7 @@ namespace Xam.LaGalerna.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xam.Forms.VideoPlayer.iOS.VideoPlayerRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

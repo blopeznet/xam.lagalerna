@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Xam.LaGalerna"
+             xmlns:views="clr-namespace:Xam.LaGalerna.Views"
+             x:Class="Xam.LaGalerna.Views.SpotifyPlayListView">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource BlackColor}">
+        <WebView x:Name="browser" BackgroundColor="{StaticResource BlackColor}" VerticalOptions="Fill" HorizontalOptions="Fill"> 
+            
+        </WebView>
+            <Image x:Name="LogoImage"                                                            
+                   Aspect="AspectFill"
+                   IsEnabled="True"                    
+                   Source="{local:ImageResource Xam.LaGalerna.Assets.Spotify_logo.png}" 
+                   HorizontalOptions="CenterAndExpand" 
+                   Margin="20"
+                   VerticalOptions="End">
+            </Image>
+            <ActivityIndicator Grid.Row="0" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Color="White"
+                BackgroundColor="Transparent"
+                IsVisible="False">
+                <ActivityIndicator.Triggers>
+                    <DataTrigger TargetType="ActivityIndicator"                                 
+                                 Value="{Binding IsBusy}">
+                        <Setter Property="IsVisible" Value="True" />
+                        <Setter Property="IsRunning" Value="True" />
+                    </DataTrigger>
+                </ActivityIndicator.Triggers>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

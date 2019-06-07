@@ -83,5 +83,26 @@ namespace Xam.LaGalerna.Views
             _lastScroll = e.ScrollY;
         }
 
+        private async void ImageButtonWeb_Clicked(object sender, EventArgs e)
+        {
+            RssDetailViewModel rs = (RssDetailViewModel)BindingContext;
+
+            await Xamarin.Essentials.Launcher.OpenAsync(rs.ArtItem.Link);
+
+        }
+
+        private async void ImageButtonShare_Clicked(object sender, EventArgs e)
+        {
+
+            RssDetailViewModel rs = (RssDetailViewModel)BindingContext;
+
+            await Xamarin.Essentials.Share.RequestAsync(new Xamarin.Essentials.ShareTextRequest
+            {
+                Uri = rs.ArtItem.Link,
+                Title = rs.ArtItem.Title
+            });
+        }
+
+        
     }
 }
