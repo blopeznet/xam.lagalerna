@@ -23,9 +23,6 @@ Snapshots from Android App:
 <table border="0">
 <tr>
 <th>
-<img src="https://github.com/blopeznet/xam.lagalerna/blob/master/Snaps/170fe06a-99c2-45ff-a17b-24514a24776b.jpg" width="188" height="334"/>
-</th>
-<th>
 <img src="https://github.com/blopeznet/xam.lagalerna/blob/master/Snaps/28b51037-af38-4be3-a723-38a7d8a6b412.jpg" width="188" height="334"/>
 </th>
 <th>
