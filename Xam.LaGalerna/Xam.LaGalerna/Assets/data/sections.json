@@ -1,0 +1,65 @@
+﻿[
+  {
+    "Title": "Portanálisis",
+    "SourceUrl": "https://www.lagalerna.com/category/portanalisis/feed/",
+    "Type": 0,
+    "LoadOnInit": true,
+    "IsSelected": true
+  },
+  {
+    "Title": "Opinión",
+    "SourceUrl": "https://www.lagalerna.com/category/opinion/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Escohotado",
+    "SourceUrl": "https://www.lagalerna.com/category/escohotado/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Vídeos",
+    "SourceUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UC-8OuYpE_uo3SmW9xTQPGOA",
+    "Type": 1,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Spotify",
+    "SourceUrl": "",
+    "Type": 2,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Entrevistas",
+    "SourceUrl": "https://www.lagalerna.com/category/entrevistas/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Históricos",
+    "SourceUrl": "https://www.lagalerna.com/category/historicos/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Crónicas",
+    "SourceUrl": "https://www.lagalerna.com/category/cronicas/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  },
+  {
+    "Title": "Así viví",
+    "SourceUrl": "https://www.lagalerna.com/category/asivivi/feed/",
+    "Type": 0,
+    "LoadOnInit": false,
+    "IsSelected": false
+  }
+]

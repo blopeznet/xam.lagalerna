@@ -7,6 +7,8 @@
              xmlns:video="clr-namespace:Xam.Forms.VideoPlayer;assembly=Xam.Forms.VideoPlayer"
              xmlns:local="clr-namespace:Xam.LaGalerna"
              BackgroundColor="{StaticResource WhiteColor}"
+             xmlns:views="clr-namespace:Xam.LaGalerna.Views"
+             xmlns:vm="clr-namespace:Xam.LaGalerna.ViewModels"
              x:Class="Xam.LaGalerna.Views.RssDetailVideoView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -51,6 +53,8 @@
                     </DataTrigger>
                 </ActivityIndicator.Triggers>
             </ActivityIndicator>
+            <views:NetErrorView x:Name="NetErrorView"
+                              IsVisible="{Binding Source={x:Static vm:MainViewModel.Instance},Path=IsNetworkOk,Converter={StaticResource InvBoolConverter}}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

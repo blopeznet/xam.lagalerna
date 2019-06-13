@@ -27,7 +27,10 @@ namespace Xam.LaGalerna.Services
         }
 
         public async Task<List<Xam.Rss.FeedItem>> GetArticles(String url,int source)
-        {                        
+        {
+            if (!CheckConnection())
+                return new List<FeedItem>();
+
             var feed = await Xam.Rss.FeedReader.ReadAsync(url);
             List<Xam.Rss.FeedItem> items = feed.Items.ToList();
             foreach (Xam.Rss.FeedItem item in items)
@@ -46,6 +49,9 @@ namespace Xam.LaGalerna.Services
 
         public async Task<List<Xam.Rss.FeedItem>> GetYoutubeArticles(String url, int source, double w, double h)
         {
+            if (!CheckConnection())
+                return new List<FeedItem>();
+
             var feed = await Xam.Rss.FeedReader.ReadAsync(url);
             List<Xam.Rss.FeedItem> items = feed.Items.ToList();
             foreach (Xam.Rss.FeedItem item in items)
@@ -63,46 +69,12 @@ namespace Xam.LaGalerna.Services
         /// Local spotify playlist
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Xam.Rss.FeedItem>> GetSpotifyArticles()
+        public List<Xam.Rss.FeedItem> GetSpotifyArticles()
         {
+            if (!CheckConnection())
+                return new List<FeedItem>();
             List<Xam.Rss.FeedItem> items = new List<FeedItem>();
-
-            Xam.Rss.FeedItem i = new FeedItem();
-            i.Title = "Camino del Bernabéu ";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/5atmXQ3TIrVWBJLRl1RSyz";
-            i.Number = 2;            
-            items.Add(i);
-
-            i = new FeedItem();
-            i.Title = "El madrid siempre vuelve";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4bR7VWFWYijLYFFSbR1WHx";
-            i.Number = 2;            
-            items.Add(i);
-
-            i = new FeedItem();
-            i.Title = "Gramola portanalista";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/6be8PI9vWH9OX5BM7SyIVt";
-            i.Number = 2;
-            items.Add(i);
-
-            i = new FeedItem();
-            i.Title = "Himnos oficiosos del Real Madrid";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4Bqd0NoHPcGxtoFOHrUTBg";
-            i.Number = 2;            
-            items.Add(i);
-
-            i = new FeedItem();
-            i.Title = "Perpetuum Real Madrid";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/7L7T1BD5SLNUoOnmsnxAjY";
-            i.Number = 2;
-            items.Add(i);
-
-            i = new FeedItem();            
-            i.Title = "Los años de la Quinta";
-            i.Content = "https://open.spotify.com/embed/user/9rk5herb3o3xno3te2dlpx8ga/playlist/4T7ImtDYmnbdVzG5P4Y0vj";
-            i.Number = 2;            
-            items.Add(i);
-
+            items = Utils.LoadDataFromApp<List<FeedItem>>("Xam.LaGalerna.Assets.data.spotify.json");
             return items;
         }
 
@@ -124,6 +96,31 @@ namespace Xam.LaGalerna.Services
             DateTime dateFromString =
             DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
             return dateFromString.ToString();
+        }
+
+        /// <summary>
+        /// Check internet avaliable
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckConnection()
+        {
+            try
+            {
+                var current = Xamarin.Essentials.Connectivity.NetworkAccess;
+
+                if (current != Xamarin.Essentials.NetworkAccess.Internet)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }              
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

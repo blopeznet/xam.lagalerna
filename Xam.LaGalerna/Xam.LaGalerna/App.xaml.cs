@@ -4,6 +4,7 @@ using Xam.LaGalerna.Services;
 using Xam.LaGalerna.ViewModels;
 using Xam.LaGalerna.ViewModels.Base;
 using Xam.LaGalerna.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,8 @@ namespace Xam.LaGalerna
 		{
 			InitializeComponent();
             BuildDependencies();
+            Xamarin.Essentials.Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+            UpdateStatusNet();
             InitNavigation();
         }
 
@@ -38,7 +41,40 @@ namespace Xam.LaGalerna
 			// Handle when your app starts
 		}
 
-		protected override void OnSleep ()
+        private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
+        {
+            UpdateStatusNet();
+        }
+
+        private void UpdateStatusNet()
+        {
+            var current = Connectivity.NetworkAccess;
+            switch (current)
+            {
+                case NetworkAccess.Internet:
+                    // Connected to internet
+                    MainViewModel.Instance.IsNetworkOk = true;
+                    break;
+                case NetworkAccess.Local:
+                    MainViewModel.Instance.IsNetworkOk = false;
+                    // Only local network access
+                    break;
+                case NetworkAccess.ConstrainedInternet:
+                    // Connected, but limited internet access such as behind a network login page
+                    MainViewModel.Instance.IsNetworkOk = false;
+                    break;
+                case NetworkAccess.None:
+                    // No internet available
+                    MainViewModel.Instance.IsNetworkOk = false;
+                    break;
+                case NetworkAccess.Unknown:
+                    // Internet access is unknown
+                    MainViewModel.Instance.IsNetworkOk = false;
+                    break;
+            }
+        }
+
+        protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
 		}

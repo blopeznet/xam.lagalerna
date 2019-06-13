@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Xam.LaGalerna.Common.Behavior"
+             xmlns:local="clr-namespace:Xam.LaGalerna"
+             xmlns:vm="clr-namespace:Xam.LaGalerna.ViewModels"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             x:Class="Xam.LaGalerna.Views.NetErrorView">
+  <ContentView.Content>
+        <Grid x:Name="GridError" BackgroundColor="{StaticResource BackGrayColor}">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="COMPRUEBA TU CONEXIÓN A INTERNET." FontSize="{StaticResource FontSize14}" Margin="12" TextColor="{StaticResource BlackColor}"/>
+                <ffimageloading:CachedImage Opacity="80" HeightRequest="100" WidthRequest="100" 
+                       Source="{local:ImageResource Xam.LaGalerna.Assets.Error.png}"                        
+                       Aspect="AspectFit"  HorizontalOptions="Center" VerticalOptions="Center">
+                </ffimageloading:CachedImage>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

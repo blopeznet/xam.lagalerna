@@ -32,26 +32,12 @@ namespace Xam.LaGalerna.ViewModels
 
 
             List<Section> list = new List<Section>();
-            list.Add(new Section() { Title = "Portanálisis", SourceUrl = "https://www.lagalerna.com/category/portanalisis/feed/", Type = SectionType.Articles,LoadOnInit=true,IsSelected=true });
-            list.Add(new Section() { Title = "Opinión", SourceUrl = "https://www.lagalerna.com/category/opinion/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Escohotado", SourceUrl = "https://www.lagalerna.com/category/escohotado/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Vídeos", SourceUrl = "https://www.youtube.com/feeds/videos.xml?channel_id=UC-8OuYpE_uo3SmW9xTQPGOA", Type= SectionType.Youtube, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Spotify", SourceUrl = "", Type = SectionType.Spotify, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Entrevistas", SourceUrl = "https://www.lagalerna.com/category/entrevistas/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Históricos", SourceUrl = "https://www.lagalerna.com/category/historicos/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Crónicas", SourceUrl = "https://www.lagalerna.com/category/cronicas/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
-            list.Add(new Section() { Title = "Así viví", SourceUrl = "https://www.lagalerna.com/category/asivivi/feed/", Type = SectionType.Articles, LoadOnInit = false, IsSelected = false });
+            list = Utils.LoadDataFromApp<List<Section>>("Xam.LaGalerna.Assets.data.sections.json");
             SectionItems = list;
             SectionDisplayItems = list.Where(s=>s.LoadOnInit).ToList();
             UpdateSections();
         }
-
-        private void GenerateSpotifySection()
-        {
-
-        }
-
-
+    
         /// <summary>
         /// Flag for know if app is busy
         /// </summary>
@@ -67,6 +53,24 @@ namespace Xam.LaGalerna.ViewModels
             {
                 _IsBusy = value;
                 OnPropertyChanged("IsBusy");
+            }
+        }
+
+        /// <summary>
+        /// Flag for know if internet is ON
+        /// </summary>
+        private bool _IsNetworkOk = false;
+        public bool IsNetworkOk
+        {
+            get
+            {
+                return _IsNetworkOk;
+            }
+
+            set
+            {
+                _IsNetworkOk = value;
+                OnPropertyChanged("IsNetworkOk");
             }
         }
 
@@ -123,7 +127,7 @@ namespace Xam.LaGalerna.ViewModels
                         s.RssItems = await RssService.Instance.GetYoutubeArticles(s.SourceUrl, (int)s.Type, 400,300);
                         break;
                     case SectionType.Spotify:
-                        s.RssItems = await RssService.Instance.GetSpotifyArticles();
+                        s.RssItems = RssService.Instance.GetSpotifyArticles();
                         break;
                 default:
                         break;
@@ -161,7 +165,7 @@ namespace Xam.LaGalerna.ViewModels
                         break;
                     case SectionType.Spotify:
                         if (s.LoadOnInit)
-                            s.RssItems = await RssService.Instance.GetSpotifyArticles();
+                            s.RssItems = RssService.Instance.GetSpotifyArticles();
                         break;
                     default:
                         break;

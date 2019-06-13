@@ -19,6 +19,7 @@ namespace Xam.LaGalerna.Droid
             Xam.Forms.VideoPlayer.Android.VideoPlayerRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            Xamarin.Essentials.Platform.Init(this, bundle); // add this line to your code, it may also be called: bundle
             LoadApplication(new App());               
             Window.SetStatusBarColor(Android.Graphics.Color.Rgb(239, 238, 237)); //status bar            
         }
@@ -27,8 +28,7 @@ namespace Xam.LaGalerna.Droid
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);            
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

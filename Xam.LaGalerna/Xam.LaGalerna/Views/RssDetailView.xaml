@@ -5,9 +5,10 @@
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:templates="clr-namespace:Xam.LaGalerna.Views.Templates"
-             xmlns:controls="clr-namespace:Xam.LaGalerna.Controls"
+             xmlns:views="clr-namespace:Xam.LaGalerna.Views"
              BackgroundColor="{StaticResource WhiteColor}"
              xmlns:local="clr-namespace:Xam.LaGalerna"
+             xmlns:vm="clr-namespace:Xam.LaGalerna.ViewModels"
              x:Class="Xam.LaGalerna.Views.RssDetailView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -71,72 +72,75 @@
         </EventTrigger>
     </ContentPage.Triggers>
     <ContentPage.Content>
-            <ScrollView 
+        <ScrollView 
             x:Name="ParallaxScroll" 
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical">
-                <Grid
+            <Grid
                 RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="320" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <!-- HEADER -->
-                    <Grid x:Name="HeaderPanel"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="320" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!-- HEADER -->
+                <Grid x:Name="HeaderPanel"
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand" 
+                                          IsVisible="{Binding Source={x:Static vm:MainViewModel.Instance},Path=IsNetworkOk}"
+
                     Grid.Row="0">
-                        <Image x:Name="LogoImage"                                                            
+                    <Image x:Name="LogoImage"                                                            
                    Aspect="AspectFill"
                    IsEnabled="True"                    
                    Source="{local:ImageResource Xam.LaGalerna.Assets.logo_big.png}" 
                    />
-                        <ffimageloading:CachedImage
+                    <ffimageloading:CachedImage
                         Aspect="AspectFill"
                         Source="{Binding ArtItem.UrlImg}"
                         sharedTransitions:Transition.Tag="{Binding ArtItem.Number}" />
-                    </Grid>
-                    <!-- CONTENT -->
-                    <StackLayout
+                </Grid>
+                <!-- CONTENT -->
+                <StackLayout
                     x:Name="ArtItemContent"
                     Grid.Row="1"
                     Opacity="0"
+                    IsVisible="{Binding Source={x:Static vm:MainViewModel.Instance},Path=IsNetworkOk}"
                     TranslationY="300">
-                        <!-- MAIN INFO -->
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto "/>
+                    <!-- MAIN INFO -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto "/>
                         </Grid.RowDefinitions>
-                            <Label 
+                        <Label 
                             Grid.Row="0"
                             Text="{Binding ArtItem.Title}"
                             Style="{StaticResource ArtItemTitleStyle}"/>
-                            <Label
+                        <Label
                             Grid.Row="1"
                             Text="{Binding ArtItem.Author}"
                             Style="{StaticResource ArtItemSubtitleStyle}"/>
-                            <Label 
+                        <Label 
                             Grid.Row="2"
                             Text="{Binding ArtItem.PublishingDateString}"
                             Style="{StaticResource ArtItemSubtitleStyle}"/>
-                        </Grid>
-                        <!-- SEPARATOR -->
-                        <Grid 
+                    </Grid>
+                    <!-- SEPARATOR -->
+                    <Grid 
                         BackgroundColor="{StaticResource GrayColor}"
                         HeightRequest="1"
                         Margin="12, 6"/>
-                        <!-- BRIEF INTRODUCCTION -->
-                        <StackLayout
+                    <!-- BRIEF INTRODUCCTION -->
+                    <StackLayout
                         Padding="20">
-                            <Label
+                        <Label
                             Text="{Binding ArtItem.Description}"
                             Style="{StaticResource BriefIntroducctionTextStyle}"/>
-                            
-                            <!--ACTION BUTTONS-->
-                            <Grid HeightRequest="70" BackgroundColor="Black">
+
+                        <!--ACTION BUTTONS-->
+                        <Grid HeightRequest="70" BackgroundColor="Black">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -221,44 +225,44 @@
                                 </VisualStateManager.VisualStateGroups>
                             </ImageButton>
                         </Grid>
-                        </StackLayout>
-                        <!-- RELATED CONTENT -->
-                        <Grid
+                    </StackLayout>
+                    <!-- RELATED CONTENT -->
+                    <Grid
                         Padding="20">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="300" />
-                            </Grid.RowDefinitions>
-                            <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="300" />
+                        </Grid.RowDefinitions>
+                        <Label
                             Grid.Row="0"
                             Text="Relacionadas"
                             Style="{StaticResource BriefIntroducctionStyle}"/>
-                            <CollectionView
+                        <CollectionView
                             Grid.Row="1"                            
                             ItemsSource="{Binding ArtItem.Related}"                           
                             InputTransparent="True">
-                                <CollectionView.ItemsLayout>
-                                    <GridItemsLayout                                     
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout                                     
                                     Orientation="Vertical" 
                                     Span="2"/>
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
             RowSpacing="0"
             HeightRequest="150"
             BackgroundColor="{StaticResource BackGrayColor}"
             Padding="0, 0, 6, 0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer                                                            
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer                                                            
                                         Tapped="Related_SelectionChanged"/>
-                                            </Grid.GestureRecognizers>
-                                            <Image x:Name="BackImage" 
+                                        </Grid.GestureRecognizers>
+                                        <Image x:Name="BackImage" 
                                                            Grid.Row="0"
                                                            Grid.RowSpan="3"
                                                            Aspect="AspectFill" 
@@ -268,23 +272,25 @@
                                                            WidthRequest="100"
                                                            HorizontalOptions="Center" 
                                                            VerticalOptions="Center">
-                                            </Image>
-                                            <ffimageloading:CachedImage
+                                        </Image>
+                                        <ffimageloading:CachedImage
                 Grid.Row="0"
                 Aspect="AspectFill"
                 Source="{Binding UrlImg}"/>
-                                            <Label
+                                        <Label
                 Grid.Row="2"
                 Text="{Binding Title}"
                 Style="{StaticResource RelatedContentSubtitleStyle}"/>
-                                        </Grid>
+                                    </Grid>
 
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </Grid>
-                    </StackLayout>
-                </Grid>
-            </ScrollView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </StackLayout>
+                <views:NetErrorView Margin="0,320,0,0" x:Name="NetErrorView" VerticalOptions="StartAndExpand" Grid.RowSpan="3"
+                              IsVisible="{Binding Source={x:Static vm:MainViewModel.Instance},Path=IsNetworkOk,Converter={StaticResource InvBoolConverter}}"/>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
